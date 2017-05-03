@@ -1,0 +1,17 @@
+{
+  "name": "medic-api-utils",
+  "version": "0.1.0",
+  "description": "",
+  "main": "utils.js",
+  "devDependencies": {
+    "jshint": "^2.9.4",
+    "nodeunit": "^0.11.0"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/jshint .",
+    "test": "./node_modules/.bin/nodeunit tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0"
+}
