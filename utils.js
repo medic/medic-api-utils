@@ -43,23 +43,29 @@ exports.setTaskState = function(task, state, details) {
  * Return task object that matches message uuid or a falsey value if match
  * fails.
  *
+ * todo rename to getTaskByMessage?
+ *
  * @api public
  */
 exports.getTask = function(uuid, doc) {
   if (!uuid || !doc) {
     return;
   }
-  for (var i in doc.tasks) {
-    for (var j in doc.tasks[i].messages) {
-      if (uuid === doc.tasks[i].messages[j].uuid) {
-        return doc.tasks[i];
+  if (doc.tasks) {
+    for (var i = 0; i < doc.tasks.length; i++) {
+      for (var j = 0; j < doc.tasks[i].messages.length; j++) {
+        if (uuid === doc.tasks[i].messages[j].uuid) {
+          return doc.tasks[i];
+        }
       }
     }
   }
-  for (var k in doc.scheduled_tasks) {
-    for (var l in doc.scheduled_tasks[k].messages) {
-      if (uuid === doc.scheduled_tasks[k].messages[l].uuid) {
-        return doc.scheduled_tasks[k];
+  if (doc.scheduled_tasks) {
+    for (var k = 0; k < doc.scheduled_tasks.length; k++) {
+      for (var l = 0; l < doc.scheduled_tasks[k].messages.length; l++) {
+        if (uuid === doc.scheduled_tasks[k].messages[l].uuid) {
+          return doc.scheduled_tasks[k];
+        }
       }
     }
   }
