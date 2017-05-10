@@ -46,6 +46,9 @@ exports.setTaskState = function(task, state, details) {
  * @api public
  */
 exports.getTask = function(uuid, doc) {
+  if (!uuid || !doc) {
+    return;
+  }
   for (var i in doc.tasks) {
     for (var j in doc.tasks[i].messages) {
       if (uuid === doc.tasks[i].messages[j].uuid) {
@@ -71,9 +74,9 @@ exports.getTask = function(uuid, doc) {
  *  - Defaults to 'en'
  */
 exports.getLocale = function(record, locale) {
-  return record.locale ||
-    (record.fields && record.fields.locale) ||
-    (record.sms_message && record.sms_message.locale) ||
+  return (record && record.locale) ||
+    (record && record.fields && record.fields.locale) ||
+    (record && record.sms_message && record.sms_message.locale) ||
     //(settings && settings.locale) ||
     locale ||
     'en';
