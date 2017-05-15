@@ -81,11 +81,13 @@ exports['getTask finds a scheduled task by id'] = function(test) {
     scheduled_tasks: [{
       messages: [{
         message: 'smell the roses',
+        when: 'tomorrow',
         uuid: '0158bd30'
       }]
     }, {
       messages: [{
         message: 'breathe',
+        when: '10 secs',
         uuid: 'c1d24d0a'
       }]
     }]
@@ -94,8 +96,26 @@ exports['getTask finds a scheduled task by id'] = function(test) {
   test.same(msg, {
     messages: [{
       message: 'smell the roses',
+      when: 'tomorrow',
       uuid: '0158bd30'
     }]
   });
+  test.done();
+};
+
+exports['getLocale returns en by default'] = function(test) {
+  test.equals('en', utils.getLocale());
+  test.done();
+};
+
+exports['getLocale returns locale if passed in'] = function(test) {
+  test.equals('sw', utils.getLocale({}, 'sw'));
+  test.done();
+};
+
+exports['getLocale returns locale if found on the record'] = function(test) {
+  test.equals('sw', utils.getLocale({locale: 'sw'}, 'jp'));
+  test.equals('sw', utils.getLocale({sms_message: {locale: 'sw'}}, 'jp'));
+  test.equals('sw', utils.getLocale({fields: {locale: 'sw'}}, 'jp'));
   test.done();
 };
