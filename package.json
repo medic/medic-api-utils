@@ -2,6 +2,7 @@
   "name": "medic-api-utils",
   "version": "0.1.2",
   "description": "",
+  "homepage": "https://github.com/medic/medic-api-utils",
   "main": "utils.js",
   "devDependencies": {
     "jshint": "^2.9.4",
